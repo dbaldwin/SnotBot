@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onProductConnect(BaseProduct baseProduct) {
                             Log.d(TAG, String.format("onProductConnect newProduct:%s", baseProduct));
-                            showToast("Product Connected");
+                            showToast(baseProduct.getModel().getDisplayName() + " connected");
                             notifyStatusChange();
                         }
                         @Override
