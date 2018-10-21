@@ -22,8 +22,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import dji.common.error.DJIError;
 import dji.common.error.DJISDKError;
+import dji.common.flightcontroller.Attitude;
+import dji.common.flightcontroller.FlightControllerState;
+import dji.common.flightcontroller.LocationCoordinate3D;
 import dji.sdk.base.BaseComponent;
 import dji.sdk.base.BaseProduct;
+import dji.sdk.flightcontroller.FlightController;
+import dji.sdk.products.Aircraft;
 import dji.sdk.sdkmanager.DJISDKManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String FLAG_CONNECTION_CHANGE = "dji_sdk_connection_change";
     private static BaseProduct mProduct;
     private Handler mHandler;
+
     private static final String[] REQUIRED_PERMISSION_LIST = new String[]{
             Manifest.permission.VIBRATE,
             Manifest.permission.INTERNET,
@@ -64,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Keep the screen on
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
     }
 
     /**
@@ -139,6 +146,39 @@ public class MainActivity extends AppCompatActivity {
                             Log.d(TAG, String.format("onProductConnect newProduct:%s", baseProduct));
                             showToast(baseProduct.getModel().getDisplayName() + " connected");
                             notifyStatusChange();
+
+                            // TODO: Refactor into separate class
+                            // This sets up a listener for us to grab FC attitude, velocity, and location
+                            Aircraft a = (Aircraft) DJISDKManager.getInstance().getProduct();
+                            FlightController f = a.getFlightController();
+                            f.setStateCallback(new FlightControllerState.Callback() {
+                                @Override
+                                public void onUpdate(@NonNull FlightControllerState flightControllerState) {
+
+                                    // Get aircraft attitude
+                                    Attitude att = flightControllerState.getAttitude();
+                                    double yaw = att.yaw;
+                                    double pitch = att.pitch;
+                                    double roll = att.roll;
+
+                                    Log.d(TAG, "yaw: " + yaw);
+                                    Log.d(TAG, "pitch: " + pitch);
+                                    Log.d(TAG, "roll: " + roll);
+
+                                    // Get aircraft velocity
+                                    flightControllerState.getVelocityX();
+                                    flightControllerState.getVelocityY();
+                                    flightControllerState.getVelocityZ();
+
+                                    // Get aircraft location
+                                    LocationCoordinate3D location = flightControllerState.getAircraftLocation();
+                                    location.getLatitude();
+                                    location.getLongitude();
+                                    location.getAltitude();
+
+                                }
+                            });
+
                         }
                         @Override
                         public void onComponentChange(BaseProduct.ComponentKey componentKey, BaseComponent oldComponent,
