@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -56,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
     private AtomicBoolean isRegistrationInProgress = new AtomicBoolean(false);
     private static final int REQUEST_PERMISSION_CODE = 12345;
 
+    // Text views to display telemetry data
+    private TextView attPitch;
+    private TextView attRoll;
+    private TextView attYaw;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Keep the screen on
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // Init the text views
+        attPitch = (TextView) findViewById(R.id.attPitch);
+        attRoll = (TextView) findViewById(R.id.attRoll);
+        attYaw = (TextView) findViewById(R.id.attYaw);
 
     }
 
@@ -155,26 +166,8 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onUpdate(@NonNull FlightControllerState flightControllerState) {
 
-                                    // Get aircraft attitude
-                                    Attitude att = flightControllerState.getAttitude();
-                                    double yaw = att.yaw;
-                                    double pitch = att.pitch;
-                                    double roll = att.roll;
-
-                                    Log.d(TAG, "yaw: " + yaw);
-                                    Log.d(TAG, "pitch: " + pitch);
-                                    Log.d(TAG, "roll: " + roll);
-
-                                    // Get aircraft velocity
-                                    flightControllerState.getVelocityX();
-                                    flightControllerState.getVelocityY();
-                                    flightControllerState.getVelocityZ();
-
-                                    // Get aircraft location
-                                    LocationCoordinate3D location = flightControllerState.getAircraftLocation();
-                                    location.getLatitude();
-                                    location.getLongitude();
-                                    location.getAltitude();
+                                    // Method to update the UI
+                                    updateTelemetry(flightControllerState);
 
                                 }
                             });
@@ -226,5 +219,42 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void updateTelemetry(FlightControllerState flightControllerState) {
+
+        // Must be declared final to use within inner class
+        final FlightControllerState fcState = flightControllerState;
+
+        // Do this on the UI thread so we can update text views
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                // Get aircraft attitude
+                Attitude att = fcState.getAttitude();
+                double yaw = att.yaw;
+                double pitch = att.pitch;
+                double roll = att.roll;
+
+                attPitch.setText(Double.toString(pitch));
+                attRoll.setText(Double.toString(roll));
+                attYaw.setText(Double.toString(yaw));
+
+                // Get aircraft velocity
+                fcState.getVelocityX();
+                fcState.getVelocityY();
+                fcState.getVelocityZ();
+
+                // Get aircraft location
+                LocationCoordinate3D location = fcState.getAircraftLocation();
+                location.getLatitude();
+                location.getLongitude();
+                location.getAltitude();
+            }
+
+        });
+
+
     }
 }

@@ -7,56 +7,91 @@
     android:background="@color/black"
     tools:context="com.unmannedairlines.snotbot.MainActivity">
 
-    <dji.ux.widget.FPVWidget
-        android:id="@+id/FPVWidget"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="150dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="64dp"
+        android:layout_weight="1"
+        android:background="@color/black"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <dji.ux.widget.FPVWidget
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <dji.ux.widget.FPVOverlayWidget
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/xatt"
+        android:id="@+id/pitchLabel"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="pitch:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/attPitch"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="n/a"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/pitchLabel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/rollLabel"
+        android:layout_width="34dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="roll:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/attPitch"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/attRoll"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="n/a"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/rollLabel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/yawLabel"
         android:layout_width="43dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="xAtt"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="yaw:"
         android:textColor="@color/white"
-        android:textSize="@dimen/dp_20_in_sw320dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FPVWidget" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/attRoll"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
-        android:id="@+id/yatt"
-        android:layout_width="wrap_content"
+        android:id="@+id/attYaw"
+        android:layout_width="72dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="yAtt"
+        android:layout_marginTop="16dp"
+        android:text="n/a"
         android:textColor="@color/white"
-        android:textSize="@dimen/dp_20_in_sw320dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/xatt" />
-
-    <TextView
-        android:id="@+id/zatt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="zAtt"
-        android:textColor="@color/white"
-        android:textSize="@dimen/dp_20_in_sw320dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yatt" />
-
-    <!--<dji.ux.widget.FPVOverlayWidget
-        android:layout_width="576dp"
-        android:layout_height="209dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="94dp" />-->
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/yawLabel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </android.support.constraint.ConstraintLayout>
