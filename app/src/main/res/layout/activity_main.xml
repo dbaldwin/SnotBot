@@ -94,6 +94,15 @@
         app:layout_constraintStart_toEndOf="@+id/yawLabel"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
+    <View
+        android:id="@+id/sep1"
+        android:layout_width="1dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/attYaw" />
+
     <TextView
         android:id="@+id/xVelLabel"
         android:layout_width="43dp"
@@ -103,7 +112,7 @@
         android:text="xVel:"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/sep1"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
@@ -162,12 +171,80 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/sep2"
         android:layout_width="1dp"
         android:layout_height="47dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
         android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/attYaw" />
+        app:layout_constraintStart_toEndOf="@+id/zVel" />
+
+    <TextView
+        android:id="@+id/latLabel"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="lat:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/sep2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/lat"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="n/a"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/latLabel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/lngLabel"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="lng:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/lat"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/lng"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="n/a"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/lngLabel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/altLabel"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="alt:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/lng"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/alt"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="n/a"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/altLabel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </android.support.constraint.ConstraintLayout>

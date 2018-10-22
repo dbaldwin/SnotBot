@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView xVel;
     private TextView yVel;
     private TextView zVel;
+    private TextView lat;
+    private TextView lng;
+    private TextView alt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
         xVel = (TextView) findViewById(R.id.xVel);
         yVel = (TextView) findViewById(R.id.yVel);
         zVel = (TextView) findViewById(R.id.zVel);
+        lat = (TextView) findViewById(R.id.lat);
+        lng = (TextView) findViewById(R.id.lng);
+        alt = (TextView) findViewById(R.id.alt);
 
     }
 
@@ -250,9 +256,9 @@ public class MainActivity extends AppCompatActivity {
 
                 // Get aircraft location
                 LocationCoordinate3D location = fcState.getAircraftLocation();
-                location.getLatitude();
-                location.getLongitude();
-                location.getAltitude();
+                lat.setText(Double.toString(location.getLatitude()));
+                lng.setText(Double.toString(location.getLongitude()));
+                alt.setText(Float.toString(location.getAltitude()));
             }
 
         });
