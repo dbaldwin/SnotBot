@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView attPitch;
     private TextView attRoll;
     private TextView attYaw;
+    private TextView xVel;
+    private TextView yVel;
+    private TextView zVel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
         attPitch = (TextView) findViewById(R.id.attPitch);
         attRoll = (TextView) findViewById(R.id.attRoll);
         attYaw = (TextView) findViewById(R.id.attYaw);
+        xVel = (TextView) findViewById(R.id.xVel);
+        yVel = (TextView) findViewById(R.id.yVel);
+        zVel = (TextView) findViewById(R.id.zVel);
 
     }
 
@@ -233,18 +239,14 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 // Get aircraft attitude
                 Attitude att = fcState.getAttitude();
-                double yaw = att.yaw;
-                double pitch = att.pitch;
-                double roll = att.roll;
-
-                attPitch.setText(Double.toString(pitch));
-                attRoll.setText(Double.toString(roll));
-                attYaw.setText(Double.toString(yaw));
+                attPitch.setText(Double.toString(att.pitch));
+                attRoll.setText(Double.toString(att.roll));
+                attYaw.setText(Double.toString(att.yaw));
 
                 // Get aircraft velocity
-                fcState.getVelocityX();
-                fcState.getVelocityY();
-                fcState.getVelocityZ();
+                xVel.setText(Float.toString(fcState.getVelocityX()));
+                yVel.setText(Float.toString(fcState.getVelocityY()));
+                zVel.setText(Float.toString(fcState.getVelocityZ()));
 
                 // Get aircraft location
                 LocationCoordinate3D location = fcState.getAircraftLocation();

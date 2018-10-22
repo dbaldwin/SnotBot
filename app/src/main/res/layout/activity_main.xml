@@ -41,7 +41,7 @@
 
     <TextView
         android:id="@+id/attPitch"
-        android:layout_width="72dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="n/a"
@@ -63,7 +63,7 @@
 
     <TextView
         android:id="@+id/attRoll"
-        android:layout_width="72dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="n/a"
@@ -85,7 +85,7 @@
 
     <TextView
         android:id="@+id/attYaw"
-        android:layout_width="72dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="n/a"
@@ -93,5 +93,81 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/yawLabel"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/xVelLabel"
+        android:layout_width="43dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="xVel:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/xVel"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="n/a"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/xVelLabel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/yVelLabel"
+        android:layout_width="43dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="yVel:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/xVel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/yVel"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="n/a"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/yVelLabel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/zVelLabel"
+        android:layout_width="43dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="zVel:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/yVel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/zVel"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="n/a"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/zVelLabel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="1dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/attYaw" />
 
 </android.support.constraint.ConstraintLayout>
