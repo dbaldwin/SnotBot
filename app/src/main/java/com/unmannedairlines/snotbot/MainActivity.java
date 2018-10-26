@@ -71,10 +71,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // When the compile and target version is higher than 22, please request the following permission at runtime to ensure the SDK works well.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkAndRequestPermissions();
-        }
+
+        checkAndRequestPermissions();
+
         setContentView(R.layout.activity_main);
 
         //Initialize DJI SDK Manager
