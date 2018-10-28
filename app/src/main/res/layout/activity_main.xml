@@ -27,6 +27,16 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/windArrow"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:srcCompat="@mipmap/wind_arrow" />
+
     <TextView
         android:id="@+id/pitchLabel"
         android:layout_width="19dp"
@@ -108,7 +118,7 @@
     <TextView
         android:id="@+id/attTilt"
         android:layout_width="60dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_marginTop="16dp"
         android:text="n/a"
         android:textColor="@color/white"
@@ -116,15 +126,37 @@
         app:layout_constraintStart_toEndOf="@+id/tiltLabel"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
+    <TextView
+        android:id="@+id/directionLabel"
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="d:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/attTilt"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/attDirection"
+        android:layout_width="60dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:text="n/a"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/directionLabel"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
     <View
         android:id="@+id/sep1"
         android:layout_width="1dp"
         android:layout_height="47dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/attTilt" />
+        app:layout_constraintStart_toEndOf="@+id/attDirection" />
 
     <TextView
         android:id="@+id/xVelLabel"

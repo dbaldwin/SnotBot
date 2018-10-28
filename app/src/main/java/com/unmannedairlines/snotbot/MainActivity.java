@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSION_CODE = 12345;
 
     // Text views to display telemetry data
-    private TextView attPitch, attRoll, attYaw, attTilt;
+    private TextView attPitch, attRoll, attYaw, attTilt, attDirection;
     private TextView xVel, yVel, zVel;
     private TextView lat, lng, alt;
+    private ImageView windArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +83,14 @@ public class MainActivity extends AppCompatActivity {
         attRoll = (TextView) findViewById(R.id.attRoll);
         attYaw = (TextView) findViewById(R.id.attYaw);
         attTilt = (TextView) findViewById(R.id.attTilt);
+        attDirection = (TextView) findViewById(R.id.attDirection);
         xVel = (TextView) findViewById(R.id.xVel);
         yVel = (TextView) findViewById(R.id.yVel);
         zVel = (TextView) findViewById(R.id.zVel);
         lat = (TextView) findViewById(R.id.lat);
         lng = (TextView) findViewById(R.id.lng);
         alt = (TextView) findViewById(R.id.alt);
+        windArrow = (ImageView) findViewById(R.id.windArrow);
 
     }
 
@@ -243,12 +247,19 @@ public class MainActivity extends AppCompatActivity {
                 double pitch = att.pitch;
                 double roll = att.roll;
                 double yaw = att.yaw;
-                double tilt = Wind.calculateTilt(pitch, roll);
-
                 attPitch.setText(Double.toString(pitch));
                 attRoll.setText(Double.toString(roll));
                 attYaw.setText(Double.toString(yaw));
+
+                // Calculate and display tilt
+                double tilt = Wind.calculateTilt(pitch, roll);
                 attTilt.setText(Double.toString(tilt));
+
+                // Set the wind arrow direction
+                // setRotation starts at
+                double direction = Wind.calculateDirection(pitch, roll);
+                windArrow.setRotation((float)direction);
+                attDirection.setText(Double.toString(direction));
 
                 // Get aircraft velocity
                 xVel.setText(Float.toString(fcState.getVelocityX()));

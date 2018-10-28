@@ -14,8 +14,11 @@ public class Wind {
 
     }
 
-    public static void calculateDirection() {
-
+    public static double calculateDirection(double pitch, double roll) {
+        double pitchDegrees = pitch * Math.PI/180;
+        double rollDegrees = roll * Math.PI/180;
+        double directionDegrees = Math.atan(Math.sin(roll)/Math.tan(pitch)) * 180/Math.PI;
+        return directionDegrees;
     }
 
 }
