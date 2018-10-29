@@ -29,8 +29,10 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void calculateNegativeTilt() throws Exception {
-        double tilt = Wind.calculateTilt(45, 45);
-        assertEquals(60.0, tilt, 0);
+    public void calculateDirection() throws Exception {
+        double direction = Wind.calculateDirection(25, 15);
+        assertEquals(327, direction, 1);
     }
+
+
 }
