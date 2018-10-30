@@ -231,10 +231,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    int sensorCounter = 0;
+    double[] pitchArray = new double[10];
+    double[] rollArray = new double[10];
+
+    // By default this method should run at 10 Hz
     private void updateTelemetry(FlightControllerState flightControllerState) {
 
         // Must be declared final to use within inner class
         final FlightControllerState fcState = flightControllerState;
+
+        // Get aircraft attitude
+        Attitude att = fcState.getAttitude();
+        final double pitch = att.pitch;
+        final double roll = att.roll;
+        final double yaw = att.yaw;
+
+        // Fill the pitch and roll arrays we can take a running average every 10 samples
+        if (sensorCounter < 10) {
+            pitchArray[sensorCounter] = pitch;
+            rollArray[sensorCounter] = roll;
+            sensorCounter = sensorCounter + 1;
+        } else {
+            pitchArray = new double[10];
+            rollArray = new double[10];
+            sensorCounter = 0;
+        }
+
 
         // Do this on the UI thread so we can update text views
         runOnUiThread(new Runnable() {
@@ -242,11 +266,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                // Get aircraft attitude
-                Attitude att = fcState.getAttitude();
-                double pitch = att.pitch;
-                double roll = att.roll;
-                double yaw = att.yaw;
                 attPitch.setText(Double.toString(pitch));
                 attRoll.setText(Double.toString(roll));
                 attYaw.setText(Double.toString(yaw));
@@ -256,10 +275,14 @@ public class MainActivity extends AppCompatActivity {
                 attTilt.setText(Double.toString(tilt));
 
                 // Set the wind arrow direction
-                // setRotation starts at
                 double direction = Wind.calculateDirection(pitch, roll);
-                windArrow.setRotation((float)direction);
                 attDirection.setText(Double.toString(direction));
+
+                // We're using the average of the sensor values to update the wind widget
+                // Clean this up later. May be better do use some sort of callback.
+                if (sensorCounter == 9) {
+                    windArrow.setRotation((float)Wind.calculateDirection(SensorUtils.getAverageSensorValue(pitchArray), SensorUtils.getAverageSensorValue(rollArray)));
+                }
 
                 // Get aircraft velocity
                 xVel.setText(Float.toString(fcState.getVelocityX()));
