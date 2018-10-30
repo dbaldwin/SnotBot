@@ -36,7 +36,7 @@
 
         <dji.ux.widget.PreFlightStatusWidget
             android:layout_width="238dp"
-            android:layout_height="33dp"/>
+            android:layout_height="25dp"/>
 
         <dji.ux.widget.FlightModeWidget
             android:layout_width="103dp"
