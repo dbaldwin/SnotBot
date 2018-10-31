@@ -27,10 +27,12 @@ import dji.common.error.DJISDKError;
 import dji.common.flightcontroller.Attitude;
 import dji.common.flightcontroller.FlightControllerState;
 import dji.common.flightcontroller.LocationCoordinate3D;
+import dji.common.remotecontroller.HardwareState;
 import dji.sdk.base.BaseComponent;
 import dji.sdk.base.BaseProduct;
 import dji.sdk.flightcontroller.FlightController;
 import dji.sdk.products.Aircraft;
+import dji.sdk.remotecontroller.RemoteController;
 import dji.sdk.sdkmanager.DJISDKManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -178,6 +180,24 @@ public class MainActivity extends AppCompatActivity {
 
                                     // Method to update the UI
                                     updateTelemetry(flightControllerState);
+
+                                }
+                            });
+
+                            // TODO: Refactor into separate class
+                            // User joysticks to determine if pilot is controlling aircraft, if not we'll update the wind direction
+                            // Looks like endpoint ranges from -660 to +660 in vertical and horizontal directions
+                            RemoteController rc = (RemoteController) ((Aircraft) DJISDKManager.getInstance().getProduct()).getRemoteController();
+                            rc.setHardwareStateCallback(new HardwareState.HardwareStateCallback() {
+                                @Override
+                                public void onUpdate(@NonNull HardwareState hardwareState) {
+
+                                    int leftStickHPosition = hardwareState.getLeftStick().getHorizontalPosition();
+                                    int leftStickVPosition = hardwareState.getLeftStick().getVerticalPosition();
+                                    int rightStickHPosition = hardwareState.getRightStick().getHorizontalPosition();
+                                    int rightStickVPosition = hardwareState.getRightStick().getVerticalPosition();
+
+                                    Log.v(TAG, "Sticks: " + leftStickHPosition + "," + leftStickVPosition + "," + rightStickHPosition + "," + rightStickVPosition);
 
                                 }
                             });
