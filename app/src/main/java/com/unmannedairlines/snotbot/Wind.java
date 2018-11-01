@@ -16,12 +16,17 @@ public class Wind {
 
     private static int calculateQuadrant(double pitch, double roll){
         int quadrant = 1;
+
+        // Top right quadrant
         if(roll >= 0 && pitch <= 0)
             quadrant = 1;
+        // Bottom right quadrant
         if(roll >= 0 && pitch >= 0)
             quadrant = 2;
+        // Bottom left quadrant
         if(roll <= 0 && pitch >= 0)
             quadrant = 3;
+        // Top left quadrant
         if(roll <= 0 && pitch <= 0)
             quadrant = 4;
 
