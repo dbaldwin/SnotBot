@@ -24,9 +24,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import dji.common.error.DJIError;
 import dji.common.error.DJISDKError;
-import dji.common.flightcontroller.Attitude;
-import dji.common.flightcontroller.FlightControllerState;
-import dji.common.flightcontroller.LocationCoordinate3D;
 import dji.common.remotecontroller.HardwareState;
 import dji.sdk.base.BaseComponent;
 import dji.sdk.base.BaseProduct;
@@ -61,10 +58,10 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSION_CODE = 12345;
 
     // Text views to display telemetry data
-    private TextView attPitch, attRoll, attYaw, attTilt, attDirection;
-    private TextView xVel, yVel, zVel;
-    private TextView lat, lng, alt;
-    private ImageView windArrow;
+    public TextView attPitch, attRoll, attYaw, attTilt, attDirection;
+    public TextView xVel, yVel, zVel;
+    public TextView lat, lng, alt;
+    public ImageView windArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,37 +167,14 @@ public class MainActivity extends AppCompatActivity {
                             showToast(baseProduct.getModel().getDisplayName() + " connected");
                             notifyStatusChange();
 
-                            // TODO: Refactor into separate class
                             // This sets up a listener for us to grab FC attitude, velocity, and location
                             Aircraft a = (Aircraft) DJISDKManager.getInstance().getProduct();
                             FlightController f = a.getFlightController();
-                            f.setStateCallback(new FlightControllerState.Callback() {
-                                @Override
-                                public void onUpdate(@NonNull FlightControllerState flightControllerState) {
+                            f.setStateCallback(new FlightControllerListener(MainActivity.this));
 
-                                    // Method to update the UI
-                                    updateTelemetry(flightControllerState);
-
-                                }
-                            });
-
-                            // TODO: Refactor into separate class
-                            // User joysticks to determine if pilot is controlling aircraft, if not we'll update the wind direction
-                            // Looks like endpoint ranges from -660 to +660 in vertical and horizontal directions
+                            // Use joysticks to determine if pilot is controlling aircraft
                             RemoteController rc = (RemoteController) ((Aircraft) DJISDKManager.getInstance().getProduct()).getRemoteController();
-                            rc.setHardwareStateCallback(new HardwareState.HardwareStateCallback() {
-                                @Override
-                                public void onUpdate(@NonNull HardwareState hardwareState) {
-
-                                    int leftStickHPosition = hardwareState.getLeftStick().getHorizontalPosition();
-                                    int leftStickVPosition = hardwareState.getLeftStick().getVerticalPosition();
-                                    int rightStickHPosition = hardwareState.getRightStick().getHorizontalPosition();
-                                    int rightStickVPosition = hardwareState.getRightStick().getVerticalPosition();
-
-                                    Log.v(TAG, "Sticks: " + leftStickHPosition + "," + leftStickVPosition + "," + rightStickHPosition + "," + rightStickVPosition);
-
-                                }
-                            });
+                            rc.setHardwareStateCallback(new RemoteControllerListener());
 
                         }
                         @Override
@@ -251,73 +225,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    int sensorCounter = 0;
-    double[] pitchArray = new double[10];
-    double[] rollArray = new double[10];
-
-    // By default this method should run at 10 Hz
-    private void updateTelemetry(FlightControllerState flightControllerState) {
-
-        // Must be declared final to use within inner class
-        final FlightControllerState fcState = flightControllerState;
-
-        // Get aircraft attitude
-        Attitude att = fcState.getAttitude();
-        final double pitch = att.pitch;
-        final double roll = att.roll;
-        final double yaw = att.yaw;
-
-        // Fill the pitch and roll arrays we can take a running average every 10 samples
-        if (sensorCounter < 10) {
-            pitchArray[sensorCounter] = pitch;
-            rollArray[sensorCounter] = roll;
-            sensorCounter = sensorCounter + 1;
-        } else {
-            pitchArray = new double[10];
-            rollArray = new double[10];
-            sensorCounter = 0;
-        }
-
-
-        // Do this on the UI thread so we can update text views
-        runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-
-                attPitch.setText(Double.toString(pitch));
-                attRoll.setText(Double.toString(roll));
-                attYaw.setText(Double.toString(yaw));
-
-                // Calculate and display tilt
-                double tilt = Wind.calculateTilt(pitch, roll);
-                attTilt.setText(Double.toString(tilt));
-
-                // Set the wind arrow direction
-                double direction = Wind.calculateDirection(pitch, roll);
-                attDirection.setText(Double.toString(direction));
-
-                // We're using the average of the sensor values to update the wind widget
-                // Clean this up later. May be better do use some sort of callback.
-                if (sensorCounter == 9) {
-                    windArrow.setRotation((float)Wind.calculateDirection(SensorUtils.getAverageSensorValue(pitchArray), SensorUtils.getAverageSensorValue(rollArray)));
-                }
-
-                // Get aircraft velocity
-                xVel.setText(Float.toString(fcState.getVelocityX()));
-                yVel.setText(Float.toString(fcState.getVelocityY()));
-                zVel.setText(Float.toString(fcState.getVelocityZ()));
-
-                // Get aircraft location
-                LocationCoordinate3D location = fcState.getAircraftLocation();
-                lat.setText(Double.toString(location.getLatitude()));
-                lng.setText(Double.toString(location.getLongitude()));
-                alt.setText(Float.toString(location.getAltitude()));
-            }
-
-        });
-
-
-    }
 }

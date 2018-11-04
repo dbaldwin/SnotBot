@@ -41,19 +41,19 @@ public class Wind {
         switch (quad)
         {
             case 1 :
-                directionDegrees = (directionDegrees + 90.0) + 180.0;
+                directionDegrees = (directionDegrees + 90.0);
                 break; // break is optional
 
             case 2 :
-                directionDegrees = (directionDegrees + 90.0) + 180.0;
+                directionDegrees = (directionDegrees + 90.0);
                 break; // break is optional
 
             case 3 :
-                directionDegrees = (270 + directionDegrees) - 180.0;
+                directionDegrees = (270 + directionDegrees);
                 break; // break is optional
 
             case 4 :
-                directionDegrees = (270.0 + directionDegrees) - 180;
+                directionDegrees = (270.0 + directionDegrees);
                 break; // break is optional
 
             default :
