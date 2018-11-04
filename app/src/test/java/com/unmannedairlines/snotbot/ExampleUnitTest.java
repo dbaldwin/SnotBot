@@ -34,5 +34,23 @@ public class ExampleUnitTest {
         assertEquals(327, direction, 1);
     }
 
+    @Test
+    public void rollingAverage() throws Exception {
+        RollingAverage ra = new RollingAverage(10);
+
+        ra.add(45);
+        ra.add(42);
+        ra.add(30);
+        ra.add(35);
+        ra.add(39);
+        ra.add(37);
+        ra.add(41);
+        ra.add(41);
+        ra.add(33);
+        ra.add(39);
+
+        assertEquals(38.2, ra.getAverage(), 0);
+
+    }
 
 }
