@@ -251,10 +251,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    int sensorCounter = 0;
-    double[] pitchArray = new double[10];
-    double[] rollArray = new double[10];
+    // Used for low pass filtering
+    double[] pitchRoll = new double[2];
+    double[] pitchRollSmooth = new double[2];
 
     // By default this method should run at 10 Hz
     private void updateTelemetry(FlightControllerState flightControllerState) {
@@ -268,17 +267,9 @@ public class MainActivity extends AppCompatActivity {
         final double roll = att.roll;
         final double yaw = att.yaw;
 
-        // Fill the pitch and roll arrays we can take a running average every 10 samples
-        if (sensorCounter < 10) {
-            pitchArray[sensorCounter] = pitch;
-            rollArray[sensorCounter] = roll;
-            sensorCounter = sensorCounter + 1;
-        } else {
-            pitchArray = new double[10];
-            rollArray = new double[10];
-            sensorCounter = 0;
-        }
-
+        pitchRoll[0] = pitch;
+        pitchRoll[1] = roll;
+        pitchRollSmooth = SensorUtils.lowPass(pitchRoll, pitchRollSmooth);
 
         // Do this on the UI thread so we can update text views
         runOnUiThread(new Runnable() {
@@ -298,11 +289,8 @@ public class MainActivity extends AppCompatActivity {
                 double direction = Wind.calculateDirection(pitch, roll);
                 attDirection.setText(Double.toString(direction));
 
-                // We're using the average of the sensor values to update the wind widget
                 // Clean this up later. May be better do use some sort of callback.
-                if (sensorCounter == 9) {
-                    windArrow.setRotation((float)Wind.calculateDirection(SensorUtils.getAverageSensorValue(pitchArray), SensorUtils.getAverageSensorValue(rollArray)));
-                }
+                windArrow.setRotation((float)Wind.calculateDirection(pitchRollSmooth[0], pitchRollSmooth[1]));
 
                 // Get aircraft velocity
                 xVel.setText(Float.toString(fcState.getVelocityX()));
