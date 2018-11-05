@@ -6,6 +6,9 @@ package com.unmannedairlines.snotbot;
 
 public class Wind {
 
+    static double tempDirection;
+    static double tempYaw;
+
     protected static double calculateTilt(double pitch, double roll) {
         double pitchDegrees = pitch * Math.PI/180;
         double rollDegrees = roll * Math.PI/180;
@@ -33,7 +36,7 @@ public class Wind {
         return quadrant;
     }
 
-    protected static double calculateDirection(double pitch, double roll) {
+    protected static double calculateDirection(double pitch, double roll, double yaw) {
         double pitchDegrees = pitch * Math.PI/180;
         double rollDegrees = roll * Math.PI/180;
         double directionDegrees = Math.atan(Math.sin(pitchDegrees)/Math.tan(rollDegrees)) * 180/Math.PI;
@@ -42,22 +45,32 @@ public class Wind {
         {
             case 1 :
                 directionDegrees = (directionDegrees + 90.0);
+                tempYaw = yaw;
+                tempDirection = directionDegrees;
                 break; // break is optional
 
             case 2 :
                 directionDegrees = (directionDegrees + 90.0);
+                tempYaw = yaw;
+                tempDirection = directionDegrees;
                 break; // break is optional
 
             case 3 :
                 directionDegrees = (270 + directionDegrees);
+                tempYaw = yaw;
+                tempDirection = directionDegrees;
                 break; // break is optional
 
             case 4 :
                 directionDegrees = (270.0 + directionDegrees);
+                tempYaw = yaw;
+                tempDirection = directionDegrees;
                 break; // break is optional
 
             default :
-                directionDegrees = directionDegrees +0.0;// Statements
+                directionDegrees = directionDegrees +0.0;
+                tempYaw = yaw;
+                tempDirection = directionDegrees;
         }
 
         return directionDegrees;

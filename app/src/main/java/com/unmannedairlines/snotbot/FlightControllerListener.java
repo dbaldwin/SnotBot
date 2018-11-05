@@ -53,27 +53,37 @@ public class FlightControllerListener implements FlightControllerState.Callback 
                 double tilt = Wind.calculateTilt(pitch, roll);
                 activity.attTilt.setText(Double.toString(tilt));
 
-                // Set the wind arrow direction
-                double direction = Wind.calculateDirection(pitch, roll);
-                activity.attDirection.setText(Double.toString(direction));
+                //only update wind if stick inputs are 0
+                if (RemoteControllerListener.rightStickVertical == 0 && RemoteControllerListener.rightStickHorizontal == 0 && RemoteControllerListener.leftStickVertical == 0 && RemoteControllerListener.leftStickHorizontal == 0)
+                {
+                    // Set the wind arrow direction
+                    double direction = Wind.calculateDirection(pitch, roll, yaw);
+                    activity.attDirection.setText(Double.toString(direction));
 
-                // We're using the average of the sensor values to update the wind widget
-                pitchRA.add(pitch);
-                rollRA.add(roll);
-                activity.windArrow.setRotation((float)Wind.calculateDirection(pitchRA.getAverage(), rollRA.getAverage()));
+                    // We're using the average of the sensor values to update the wind widget
+                    pitchRA.add(pitch);
+                    rollRA.add(roll);
+                    activity.windArrow.setRotation((float) Wind.calculateDirection(pitchRA.getAverage(), rollRA.getAverage(), yaw));
+                }
 
-                // Get aircraft velocity
-                activity.xVel.setText(Float.toString(fcState.getVelocityX()));
-                activity.yVel.setText(Float.toString(fcState.getVelocityY()));
-                activity.zVel.setText(Float.toString(fcState.getVelocityZ()));
+                else{
+                    double direction = Wind.tempDirection - yaw + Wind.tempYaw;
+                    activity.attDirection.setText(Double.toString(direction));
 
-                // Get aircraft location
-                LocationCoordinate3D location = fcState.getAircraftLocation();
-                activity.lat.setText(Double.toString(location.getLatitude()));
-                activity.lng.setText(Double.toString(location.getLongitude()));
-                activity.alt.setText(Float.toString(location.getAltitude()));
+                    activity.windArrow.setRotation((float)direction);
+                }
+                    // Get aircraft velocity
+                    activity.xVel.setText(Float.toString(fcState.getVelocityX()));
+                    activity.yVel.setText(Float.toString(fcState.getVelocityY()));
+                    activity.zVel.setText(Float.toString(fcState.getVelocityZ()));
+
+                    // Get aircraft location
+                    LocationCoordinate3D location = fcState.getAircraftLocation();
+                    activity.lat.setText(Double.toString(location.getLatitude()));
+                    activity.lng.setText(Double.toString(location.getLongitude()));
+                    activity.alt.setText(Float.toString(location.getAltitude()));
+
             }
-
         });
 
 

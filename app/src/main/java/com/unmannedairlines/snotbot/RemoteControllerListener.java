@@ -10,18 +10,20 @@ import dji.common.remotecontroller.HardwareState;
 
 public class RemoteControllerListener implements HardwareState.HardwareStateCallback {
 
+    static int leftStickHorizontal, leftStickVertical, rightStickHorizontal, rightStickVertical;
+
     private static final String TAG = RemoteControllerListener.class.getName();
 
     @Override
     // Looks like endpoint ranges from -660 to +660 in vertical and horizontal directions
     public void onUpdate(@NonNull HardwareState hardwareState) {
 
-        int leftStickHPosition = hardwareState.getLeftStick().getHorizontalPosition();
-        int leftStickVPosition = hardwareState.getLeftStick().getVerticalPosition();
-        int rightStickHPosition = hardwareState.getRightStick().getHorizontalPosition();
-        int rightStickVPosition = hardwareState.getRightStick().getVerticalPosition();
+         leftStickHorizontal = hardwareState.getLeftStick().getHorizontalPosition();
+         leftStickVertical = hardwareState.getLeftStick().getVerticalPosition();
+         rightStickHorizontal = hardwareState.getRightStick().getHorizontalPosition();
+         rightStickVertical = hardwareState.getRightStick().getVerticalPosition();
 
-        Log.v(TAG, "Sticks: " + leftStickHPosition + "," + leftStickVPosition + "," + rightStickHPosition + "," + rightStickVPosition);
+        Log.v(TAG, "Sticks: " + leftStickHorizontal + "," + leftStickVertical + "," + rightStickHorizontal + "," + rightStickVertical);
 
     }
 }
