@@ -341,6 +341,7 @@
         android:id="@+id/windArrow"
         android:layout_width="600dp"
         android:layout_height="600dp"
+        android:layout_marginBottom="48dp"
         android:layout_marginStart="212dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
