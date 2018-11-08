@@ -54,8 +54,13 @@ public class FlightControllerListener implements FlightControllerState.Callback 
                 activity.attTilt.setText(Double.toString(tilt));
 
                 //only update wind if stick inputs are 0
+                stickCheck:
                 if (RemoteControllerListener.rightStickVertical == 0 && RemoteControllerListener.rightStickHorizontal == 0 && RemoteControllerListener.leftStickVertical == 0 && RemoteControllerListener.leftStickHorizontal == 0)
                 {
+                    //if drone still has momentum when stopping, use temp values instead of recalculating
+                    if(fcState.getVelocityX() >.5 || fcState.getVelocityY() > .5 || fcState.getVelocityY() < -.5 || fcState.getVelocityX() < -.5)
+                        break stickCheck;
+
                     // Set the wind arrow direction
                     double direction = Wind.calculateDirection(pitch, roll, yaw);
                     activity.attDirection.setText(Double.toString(direction));
