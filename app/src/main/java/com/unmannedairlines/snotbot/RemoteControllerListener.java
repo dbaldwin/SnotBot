@@ -10,7 +10,7 @@ import dji.common.remotecontroller.HardwareState;
 
 public class RemoteControllerListener implements HardwareState.HardwareStateCallback {
 
-    static int leftStickHorizontal, leftStickVertical, rightStickHorizontal, rightStickVertical;
+    protected static int leftStickHorizontal, leftStickVertical, rightStickHorizontal, rightStickVertical;
 
     private static final String TAG = RemoteControllerListener.class.getName();
 

@@ -6,8 +6,8 @@ package com.unmannedairlines.snotbot;
 
 public class Wind {
 
-    static double tempDirection;
-    static double tempYaw;
+    protected static double tempDirection;
+    protected static double tempYaw;
 
     protected static double calculateTilt(double pitch, double roll) {
         double pitchDegrees = pitch * Math.PI/180;
