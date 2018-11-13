@@ -17,6 +17,13 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+//trying to add show/hide button later for wind indicator
+//some of these might not be needed;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;

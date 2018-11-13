@@ -72,6 +72,21 @@
             android:layout_marginTop="3dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/flightTime"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@color/dark_gray"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/signal">
+
+        <dji.ux.widget.RemainingFlightTimeWidget
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+    </LinearLayout>
+
+
     <TextView
         android:id="@+id/pitchLabel"
         android:layout_width="19dp"
@@ -366,6 +381,9 @@
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout" />
+
+
+
 
 
 </android.support.constraint.ConstraintLayout>
