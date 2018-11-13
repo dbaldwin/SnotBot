@@ -20,13 +20,17 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import dji.common.camera.SettingsDefinitions;
 import dji.common.error.DJIError;
 import dji.common.error.DJISDKError;
 import dji.common.remotecontroller.HardwareState;
+import dji.common.util.CommonCallbacks;
 import dji.sdk.base.BaseComponent;
 import dji.sdk.base.BaseProduct;
+import dji.sdk.camera.Camera;
 import dji.sdk.flightcontroller.FlightController;
 import dji.sdk.products.Aircraft;
 import dji.sdk.remotecontroller.RemoteController;
@@ -145,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     showToast("SDK registration in progress...");
                     DJISDKManager.getInstance().registerApp(MainActivity.this.getApplicationContext(), new DJISDKManager.SDKManagerCallback() {
+
                         @Override
                         public void onRegister(DJIError djiError) {
                             if (djiError == DJISDKError.REGISTRATION_SUCCESS) {
@@ -155,14 +160,17 @@ public class MainActivity extends AppCompatActivity {
                             }
                             Log.v(TAG, djiError.getDescription());
                         }
+
                         @Override
                         public void onProductDisconnect() {
                             Log.d(TAG, "onProductDisconnect");
                             showToast("Product Disconnected");
                             notifyStatusChange();
                         }
+
                         @Override
                         public void onProductConnect(BaseProduct baseProduct) {
+
                             Log.d(TAG, String.format("onProductConnect newProduct:%s", baseProduct));
                             showToast(baseProduct.getModel().getDisplayName() + " connected");
                             notifyStatusChange();
@@ -176,7 +184,11 @@ public class MainActivity extends AppCompatActivity {
                             RemoteController rc = (RemoteController) ((Aircraft) DJISDKManager.getInstance().getProduct()).getRemoteController();
                             rc.setHardwareStateCallback(new RemoteControllerListener());
 
+                            // Let's find a better place for this later. For now we'll set the camera mode to video.
+                            setCameraMode(baseProduct.getCamera(), SettingsDefinitions.CameraMode.RECORD_VIDEO);
+
                         }
+
                         @Override
                         public void onComponentChange(BaseProduct.ComponentKey componentKey, BaseComponent oldComponent,
                                                       BaseComponent newComponent) {
@@ -223,6 +235,28 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    // Set camera mode to video so the CameraCaptureWidget will start/stop video when pressed
+    private void setCameraMode(Camera camera, SettingsDefinitions.CameraMode cameraMode) {
+
+        if (camera != null) {
+
+            camera.setMode(cameraMode, new CommonCallbacks.CompletionCallback() {
+                @Override
+                public void onResult(DJIError djiError) {
+
+                    if (djiError == null) {
+                        showToast("Camera mode set to video");
+                    } else {
+                        showToast("Error setting camera mode to video");
+                    }
+
+                }
+            });
+
+        }
+
     }
 
 }

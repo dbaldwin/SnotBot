@@ -347,42 +347,16 @@
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:srcCompat="@mipmap/wind_arrow" />
 
-    <dji.ux.widget.controls.CameraControlsWidget
+    <dji.ux.widget.controls.CameraCaptureWidget
         android:id="@+id/cameraControls"
-        android:layout_width="50dp"
-        android:layout_height="213dp"
+        android:layout_width="75dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/signal"
-        tools:ignore="RtlHardcoded" />
-
-    <dji.ux.panel.CameraSettingAdvancedPanel
-        android:layout_width="180dp"
-        android:layout_height="263dp"
-        android:layout_below="@id/cameraControls"
-        android:layout_marginBottom="8dp"
-        android:layout_toLeftOf="@+id/cameraControls"
-        android:gravity="center"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toStartOf="@+id/cameraControls"
-        app:layout_constraintTop_toBottomOf="@+id/signal"
-        tools:ignore="RtlHardcoded" />
-
-    <dji.ux.panel.CameraSettingExposurePanel
-        android:layout_width="180dp"
-        android:layout_height="263dp"
-        android:layout_below="@id/cameraControls"
-        android:layout_toLeftOf="@+id/cameraControls"
-        android:gravity="center"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toStartOf="@+id/cameraControls"
-        app:layout_constraintTop_toBottomOf="@+id/signal"
-        tools:ignore="RtlHardcoded"/>
+        app:layout_constraintTop_toBottomOf="@+id/signal" />
 
     <dji.ux.widget.dashboard.DashboardWidget
         android:id="@+id/Compass"
@@ -391,8 +365,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        tools:ignore="RtlHardcoded" />
+        app:layout_constraintStart_toStartOf="@+id/linearLayout" />
 
 
 </android.support.constraint.ConstraintLayout>
