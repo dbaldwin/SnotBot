@@ -363,6 +363,28 @@
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:srcCompat="@mipmap/wind_arrow" />
 
+    <ImageView
+        android:id="@+id/maxWind"
+        app:srcCompat="@mipmap/max"
+        android:layout_width="600dp"
+        android:layout_height="600dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginStart="212dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        />
+
+    <ImageView
+        android:id="@+id/minWind"
+        app:srcCompat="@mipmap/min"
+        android:layout_width="600dp"
+        android:layout_height="600dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginStart="212dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        />
+
     <dji.ux.widget.controls.CameraCaptureWidget
         android:id="@+id/cameraControls"
         android:layout_width="75dp"

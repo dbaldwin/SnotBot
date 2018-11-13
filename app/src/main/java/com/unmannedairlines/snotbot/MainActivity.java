@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     public TextView attPitch, attRoll, attYaw, attTilt, attDirection;
     public TextView xVel, yVel, zVel;
     public TextView lat, lng, alt;
-    public ImageView windArrow;
+    public ImageView windArrow, minWind, maxWind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
         lng = (TextView) findViewById(R.id.lng);
         alt = (TextView) findViewById(R.id.alt);
         windArrow = (ImageView) findViewById(R.id.windArrow);
+        minWind = (ImageView) findViewById(R.id.minWind);
+        maxWind = (ImageView) findViewById(R.id.maxWind);
+
 
     }
 
