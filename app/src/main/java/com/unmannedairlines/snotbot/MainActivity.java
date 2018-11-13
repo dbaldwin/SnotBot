@@ -187,6 +187,9 @@ public class MainActivity extends AppCompatActivity {
                             // Let's find a better place for this later. For now we'll set the camera mode to video.
                             setCameraMode(baseProduct.getCamera(), SettingsDefinitions.CameraMode.RECORD_VIDEO);
 
+                            // This prints the log file storage location
+                            //Log.v(TAG, DJISDKManager.getInstance().getLogPath());
+
                         }
 
                         @Override
