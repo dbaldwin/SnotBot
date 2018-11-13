@@ -29,46 +29,36 @@
     <LinearLayout
         android:id="@+id/signal"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="33dp"
         android:background="@color/dark_gray"
         android:orientation="horizontal">
 
         <dji.ux.widget.PreFlightStatusWidget
             android:layout_width="238dp"
-            android:layout_height="25dp" />
+            android:layout_height="33dp" />
 
         <dji.ux.widget.FlightModeWidget
-            android:layout_width="103dp"
-            android:layout_height="22dp" />
+            android:layout_width="154dp"
+            android:layout_height="33dp" />
 
         <dji.ux.widget.GPSSignalWidget
-            android:layout_width="44dp"
-            android:layout_height="22dp" />
-
-        <dji.ux.widget.VisionWidget
-            android:layout_width="22dp"
-            android:layout_height="22dp" />
+            android:layout_width="66dp"
+            android:layout_height="33dp" />
 
         <dji.ux.widget.RemoteControlSignalWidget
-            android:layout_width="38dp"
-            android:layout_height="22dp" />
+            android:layout_width="57dp"
+            android:layout_height="33dp" />
 
         <dji.ux.widget.VideoSignalWidget
-            android:layout_width="38dp"
-            android:layout_height="22dp" />
-
-        <dji.ux.widget.WiFiSignalWidget
-            android:layout_width="32dp"
-            android:layout_height="25dp" />
+            android:layout_width="57dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="10dp" />
 
         <dji.ux.widget.BatteryWidget
-            android:layout_width="96dp"
-            android:layout_height="22dp" />
+            android:layout_width="71dp"
+            android:layout_height="28dp"
+            app:excludeView="singleVoltage|doubleVoltage" />
 
-        <dji.ux.widget.ConnectionWidget
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_marginTop="3dp" />
     </LinearLayout>
 
     <ImageView
