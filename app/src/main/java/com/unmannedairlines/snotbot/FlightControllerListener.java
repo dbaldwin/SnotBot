@@ -1,6 +1,8 @@
 package com.unmannedairlines.snotbot;
 
+import android.nfc.Tag;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import dji.common.flightcontroller.Attitude;
 import dji.common.flightcontroller.FlightControllerState;
@@ -12,7 +14,9 @@ import dji.common.flightcontroller.LocationCoordinate3D;
 
 public class FlightControllerListener implements FlightControllerState.Callback {
 
+    private static final String TAG = FlightControllerListener.class.getName();
     private MainActivity activity;
+
 
     // Calculate the rolling averages for pitch and roll using the last 10 readings
     RollingAverage pitchRA = new RollingAverage(10);
@@ -39,19 +43,31 @@ public class FlightControllerListener implements FlightControllerState.Callback 
         final double roll = att.roll;
         final double yaw = att.yaw;
 
+        // Just log these for now
+        Log.v(TAG, "Pitch: " + Double.toString(pitch));
+        Log.v(TAG, "Roll: " + Double.toString(roll));
+        Log.v(TAG, "Yaw: " + Double.toString(yaw));
+
+        // Get aircraft velocity
+        Log.v(TAG, "Vel X: " + Float.toString(fcState.getVelocityX()));
+        Log.v(TAG, "Vel Y: " + Float.toString(fcState.getVelocityY()));
+        Log.v(TAG, "Vel Z: " + Float.toString(fcState.getVelocityZ()));
+
+        // Get aircraft location
+        LocationCoordinate3D location = fcState.getAircraftLocation();
+        Log.v(TAG, "Lat: " + Double.toString(location.getLatitude()));
+        Log.v(TAG, "Lng: " + Double.toString(location.getLongitude()));
+        Log.v(TAG, "Alt: " + Double.toString(location.getAltitude()));
+
         // Do this on the UI thread so we can update text views
         activity.runOnUiThread(new Runnable() {
 
             @Override
             public void run() {
 
-                activity.attPitch.setText(Double.toString(pitch));
-                activity.attRoll.setText(Double.toString(roll));
-                activity.attYaw.setText(Double.toString(yaw));
-
                 // Calculate and display tilt
                 double tilt = Wind.calculateTilt(pitch, roll);
-                activity.attTilt.setText(Double.toString(tilt));
+                Log.v(TAG, "Wind tilt: " + Double.toString(tilt));
 
                 //only update wind if stick inputs are 0
                 stickCheck:
@@ -63,7 +79,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
                     // Set the wind arrow direction
                     double direction = Wind.calculateDirection(pitch, roll, yaw);
-                    activity.attDirection.setText(Double.toString(direction));
+                    Log.v(TAG, "Updated wind direction: " + Double.toString(direction));
 
                     // We're using the average of the sensor values to update the wind widget
                     pitchRA.add(pitch);
@@ -73,20 +89,9 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
                 else{
                     double direction = Wind.tempDirection - yaw + Wind.tempYaw;
-                    activity.attDirection.setText(Double.toString(direction));
-
+                    Log.v(TAG, "Temp wind direction: " + Double.toString(direction));
                     activity.windArrow.setRotation((float)direction);
                 }
-                    // Get aircraft velocity
-                    activity.xVel.setText(Float.toString(fcState.getVelocityX()));
-                    activity.yVel.setText(Float.toString(fcState.getVelocityY()));
-                    activity.zVel.setText(Float.toString(fcState.getVelocityZ()));
-
-                    // Get aircraft location
-                    LocationCoordinate3D location = fcState.getAircraftLocation();
-                    activity.lat.setText(Double.toString(location.getLatitude()));
-                    activity.lng.setText(Double.toString(location.getLongitude()));
-                    activity.alt.setText(Float.toString(location.getAltitude()));
 
             }
         });

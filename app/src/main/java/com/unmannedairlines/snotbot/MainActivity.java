@@ -61,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
     private AtomicBoolean isRegistrationInProgress = new AtomicBoolean(false);
     private static final int REQUEST_PERMISSION_CODE = 12345;
 
-    // Text views to display telemetry data
-    public TextView attPitch, attRoll, attYaw, attTilt, attDirection;
-    public TextView xVel, yVel, zVel;
-    public TextView lat, lng, alt;
+    // Wind indicator
     public ImageView windArrow;
+
+    // SDK version
+    public TextView sdkVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,19 +81,12 @@ public class MainActivity extends AppCompatActivity {
         // Keep the screen on
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        // Init the text views
-        attPitch = (TextView) findViewById(R.id.attPitch);
-        attRoll = (TextView) findViewById(R.id.attRoll);
-        attYaw = (TextView) findViewById(R.id.attYaw);
-        attTilt = (TextView) findViewById(R.id.attTilt);
-        attDirection = (TextView) findViewById(R.id.attDirection);
-        xVel = (TextView) findViewById(R.id.xVel);
-        yVel = (TextView) findViewById(R.id.yVel);
-        zVel = (TextView) findViewById(R.id.zVel);
-        lat = (TextView) findViewById(R.id.lat);
-        lng = (TextView) findViewById(R.id.lng);
-        alt = (TextView) findViewById(R.id.alt);
+        // Wind indicator
         windArrow = (ImageView) findViewById(R.id.windArrow);
+
+        // Populate the SDK version
+        sdkVersion = (TextView) findViewById(R.id.sdkVersion);
+        sdkVersion.setText("SDK " + DJISDKManager.getInstance().getSDKVersion());
 
     }
 

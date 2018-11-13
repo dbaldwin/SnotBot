@@ -11,7 +11,6 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="64dp"
         android:layout_weight="1"
         android:background="@color/black"
         android:orientation="vertical"
@@ -72,279 +71,14 @@
             android:layout_marginTop="3dp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/pitchLabel"
-        android:layout_width="19dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="p:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/attPitch"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="n/a"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/pitchLabel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/rollLabel"
-        android:layout_width="16dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="r:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/attPitch"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/attRoll"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="n/a"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/rollLabel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/yawLabel"
-        android:layout_width="16dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="y:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/attRoll"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/attYaw"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="n/a"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/yawLabel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/tiltLabel"
-        android:layout_width="16dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="t:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/attYaw"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/attTilt"
-        android:layout_width="60dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="16dp"
-        android:text="n/a"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tiltLabel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/directionLabel"
-        android:layout_width="16dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="d:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/attTilt"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/attDirection"
-        android:layout_width="60dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="16dp"
-        android:text="n/a"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/directionLabel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <View
-        android:id="@+id/sep1"
-        android:layout_width="1dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/attDirection" />
-
-    <TextView
-        android:id="@+id/xVelLabel"
-        android:layout_width="43dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="xVel:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/sep1"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/xVel"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="n/a"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/xVelLabel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/yVelLabel"
-        android:layout_width="43dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="yVel:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/xVel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/yVel"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="n/a"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/yVelLabel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/zVelLabel"
-        android:layout_width="43dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="zVel:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/yVel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/zVel"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="n/a"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/zVelLabel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <View
-        android:id="@+id/sep2"
-        android:layout_width="1dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
-        android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/zVel" />
-
-    <TextView
-        android:id="@+id/latLabel"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="lat:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/sep2"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/lat"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="n/a"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/latLabel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/lngLabel"
-        android:layout_width="32dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="lng:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/lat"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/lng"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="n/a"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/lngLabel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/altLabel"
-        android:layout_width="32dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="alt:"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/lng"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <TextView
-        android:id="@+id/alt"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="n/a"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/altLabel"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
     <ImageView
         android:id="@+id/windArrow"
-        android:layout_width="600dp"
+        android:layout_width="0dp"
         android:layout_height="600dp"
-        android:layout_marginBottom="48dp"
-        android:layout_marginStart="212dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        android:layout_marginTop="75dp"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/wind_arrow" />
 
     <dji.ux.widget.controls.CameraCaptureWidget
@@ -365,7 +99,21 @@
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout" />
+        app:layout_constraintStart_toStartOf="@+id/linearLayout" >
+
+    </dji.ux.widget.dashboard.DashboardWidget>
+
+    <TextView
+        android:id="@+id/sdkVersion"
+        android:layout_width="100dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="right"
+        android:text="SDK:"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout" />
 
 
 </android.support.constraint.ConstraintLayout>
