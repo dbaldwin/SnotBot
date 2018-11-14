@@ -85,6 +85,8 @@ public class FlightControllerListener implements FlightControllerState.Callback 
                     pitchRA.add(pitch);
                     rollRA.add(roll);
                     activity.windArrow.setRotation((float) Wind.calculateDirection(pitchRA.getAverage(), rollRA.getAverage(), yaw));
+                    activity.maxWind.setRotation((float) Wind.calculateDirection(pitchRA.sorted[9], rollRA.sorted[9], yaw));
+                    activity.minWind.setRotation((float) Wind.calculateDirection(pitchRA.sorted[0], rollRA.sorted[0], yaw));
                 }
 
                 else{

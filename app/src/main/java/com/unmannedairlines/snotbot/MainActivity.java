@@ -20,13 +20,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import dji.common.camera.SettingsDefinitions;
 import dji.common.error.DJIError;
 import dji.common.error.DJISDKError;
-import dji.common.remotecontroller.HardwareState;
 import dji.common.util.CommonCallbacks;
 import dji.sdk.base.BaseComponent;
 import dji.sdk.base.BaseProduct;
@@ -61,8 +59,10 @@ public class MainActivity extends AppCompatActivity {
     private AtomicBoolean isRegistrationInProgress = new AtomicBoolean(false);
     private static final int REQUEST_PERMISSION_CODE = 12345;
 
-    // Wind indicator
+    // Wind indicators
     public ImageView windArrow;
+    public ImageView minWind;
+    public ImageView maxWind;
 
     // SDK version
     public TextView sdkVersion;
@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Wind indicator
         windArrow = (ImageView) findViewById(R.id.windArrow);
+        minWind = (ImageView) findViewById(R.id.minWind);
+        maxWind = (ImageView) findViewById(R.id.maxWind);
+
 
         // Populate the SDK version
         sdkVersion = (TextView) findViewById(R.id.sdkVersion);
