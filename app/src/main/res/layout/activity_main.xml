@@ -365,7 +365,7 @@
 
     <ImageView
         android:id="@+id/maxWind"
-        app:srcCompat="@mipmap/max"
+        app:srcCompat="@mipmap/min_max"
         android:layout_width="600dp"
         android:layout_height="600dp"
         android:layout_marginBottom="48dp"
@@ -376,7 +376,7 @@
 
     <ImageView
         android:id="@+id/minWind"
-        app:srcCompat="@mipmap/min"
+        app:srcCompat="@mipmap/min_max"
         android:layout_width="600dp"
         android:layout_height="600dp"
         android:layout_marginBottom="48dp"
