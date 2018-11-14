@@ -9,12 +9,14 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@color/black"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <dji.ux.widget.FPVWidget
             android:layout_width="match_parent"
@@ -28,10 +30,13 @@
 
     <LinearLayout
         android:id="@+id/signal"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="25dp"
         android:background="@color/dark_gray"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout">
 
         <dji.ux.widget.PreFlightStatusWidget
             android:layout_width="238dp"
@@ -92,17 +97,6 @@
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/signal" />
 
-    <dji.ux.widget.dashboard.DashboardWidget
-        android:id="@+id/Compass"
-        android:layout_width="405dp"
-        android:layout_height="91dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout" >
-
-    </dji.ux.widget.dashboard.DashboardWidget>
-
     <TextView
         android:id="@+id/sdkVersion"
         android:layout_width="100dp"
@@ -115,5 +109,62 @@
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout" />
 
+    <EditText
+        android:id="@+id/txtInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="51dp"
+        android:gravity="top"
+        android:hint="Write Something To Save"
+        app:layout_constraintBottom_toBottomOf="@+id/windArrow"
+        app:layout_constraintEnd_toStartOf="@+id/btnRead"
+        app:layout_constraintStart_toStartOf="@+id/btnRead" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtInput"
+        android:layout_marginTop="7dp"
+        android:text="Save"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/txtInput" />
+
+    <Button
+        android:id="@+id/btnRead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtInput"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@+id/btnSave"
+        android:layout_toRightOf="@+id/btnSave"
+        android:text="Read"
+        app:layout_constraintStart_toEndOf="@+id/btnSave"
+        app:layout_constraintTop_toBottomOf="@+id/txtInput" />
+
+    <TextView
+        android:id="@+id/txtContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtInput"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/txtInput"
+        android:layout_below="@+id/btnSave"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="504dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
 </android.support.constraint.ConstraintLayout>
