@@ -1,5 +1,6 @@
 package com.unmannedairlines.snotbot;
 
+import android.location.Location;
 import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
         // Get aircraft attitude
         Attitude att = fcState.getAttitude();
+        LocationCoordinate3D position = flightControllerState.getAircraftLocation();
         final double pitch = att.pitch;
         final double roll = att.roll;
         final double yaw = att.yaw;
@@ -54,7 +56,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
         Log.v(TAG, "Vel Z: " + Float.toString(fcState.getVelocityZ()));
 
         // Get aircraft location
-        LocationCoordinate3D location = fcState.getAircraftLocation();
+        final LocationCoordinate3D location = fcState.getAircraftLocation();
         Log.v(TAG, "Lat: " + Double.toString(location.getLatitude()));
         Log.v(TAG, "Lng: " + Double.toString(location.getLongitude()));
         Log.v(TAG, "Alt: " + Double.toString(location.getAltitude()));
@@ -68,6 +70,10 @@ public class FlightControllerListener implements FlightControllerState.Callback 
                 // Calculate and display tilt
                 double tilt = Wind.calculateTilt(pitch, roll);
                 Log.v(TAG, "Wind tilt: " + Double.toString(tilt));
+
+                // display altitude on scale
+                float alt = location.getAltitude();
+                activity.altArrow.setY(900-(alt*(float)40));
 
                 //only update wind if stick inputs are 0
                 stickCheck:

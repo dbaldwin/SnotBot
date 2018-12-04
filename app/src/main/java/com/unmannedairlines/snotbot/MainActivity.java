@@ -64,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
     public ImageView minWind;
     public ImageView maxWind;
 
+    //Altitude scale
+    public ImageView altScale;
+    public ImageView altArrow;
+
     // SDK version
     public TextView sdkVersion;
 
@@ -86,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
         minWind = (ImageView) findViewById(R.id.minWind);
         maxWind = (ImageView) findViewById(R.id.maxWind);
 
+        //Altitude scale
+        altScale = (ImageView) findViewById(R.id.altScale);
+        altArrow = (ImageView) findViewById(R.id.altArrow);
 
         // Populate the SDK version
         sdkVersion = (TextView) findViewById(R.id.sdkVersion);
