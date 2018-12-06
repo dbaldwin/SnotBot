@@ -73,7 +73,11 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
                 // display altitude on scale
                 float alt = location.getAltitude();
-                activity.altArrow.setY(900-(alt*(float)40));
+                activity.altArrow.setY(1150-(alt*(float)69));
+
+                //Y 100dp = 45ft
+                //Y 575dp = 0ft
+                //setY(975 - ...) sets arrow to about 8ft
 
                 //only update wind if stick inputs are 0
                 stickCheck:
