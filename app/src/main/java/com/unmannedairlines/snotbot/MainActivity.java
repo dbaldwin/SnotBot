@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +67,24 @@ public class MainActivity extends AppCompatActivity {
 
     // SDK version
     public TextView sdkVersion;
+
+    //take off alt
+    public int takeOff = 0;
+
+    public void increaseInteger(View view) {
+        takeOff = takeOff + 1;
+        display(takeOff);
+
+    }public void decreaseInteger(View view) {
+        takeOff = takeOff - 1;
+        display(takeOff);
+    }
+
+    private void display(int number) {
+        TextView displayInteger = (TextView) findViewById(
+                R.id.integer_number);
+        displayInteger.setText("" + number);
+    }//end code for take off alt
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

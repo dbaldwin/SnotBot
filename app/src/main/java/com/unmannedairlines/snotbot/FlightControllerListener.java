@@ -1,7 +1,5 @@
 package com.unmannedairlines.snotbot;
 
-import android.content.res.ColorStateList;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.TextView;
@@ -70,12 +68,13 @@ public class FlightControllerListener implements FlightControllerState.Callback 
             public void run() {
                 //Altitude
                 TextView printAlt = (TextView) activity.findViewById(R.id.altitude);
-                String s = String.valueOf(alt);
-                printAlt.setText(s);
-                if(alt>=4 && alt <=15)
+                if((alt+activity.takeOff)>=4 && (alt+activity.takeOff) <=15)
                     printAlt.setTextColor(0xff00E51B);
                 else
                     printAlt.setTextColor(0xffFF0000);
+                String s = String.valueOf(alt+activity.takeOff);
+                printAlt.setText(s);
+
 
                 // Calculate and display tilt
                 double tilt = Wind.calculateTilt(pitch, roll);
