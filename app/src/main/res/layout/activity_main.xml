@@ -74,7 +74,7 @@
         android:id="@+id/windArrow"
         android:layout_width="0dp"
         android:layout_height="600dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="@+id/fpvWidget"
         app:layout_constraintStart_toStartOf="@+id/fpvWidget"
         app:layout_constraintTop_toTopOf="parent"
@@ -133,6 +133,19 @@
         android:gravity="right"
         android:text="SDK:"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/fpvWidget"
+        app:layout_constraintEnd_toEndOf="@+id/fpvWidget" />
+
+    <TextView
+        android:id="@+id/altitude"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="80dp"
+        android:gravity="left|bottom"
+        android:text="ALT:"
+        android:textSize="40dp"
+        android:textColor="@color/red"
         app:layout_constraintBottom_toBottomOf="@+id/fpvWidget"
         app:layout_constraintEnd_toEndOf="@+id/fpvWidget" />
 

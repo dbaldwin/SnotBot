@@ -1,8 +1,10 @@
 package com.unmannedairlines.snotbot;
 
+import android.content.res.ColorStateList;
 import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.TextView;
 
 import dji.common.flightcontroller.Attitude;
 import dji.common.flightcontroller.FlightControllerState;
@@ -59,11 +61,21 @@ public class FlightControllerListener implements FlightControllerState.Callback 
         Log.v(TAG, "Lng: " + Double.toString(location.getLongitude()));
         Log.v(TAG, "Alt: " + Double.toString(location.getAltitude()));
 
+        final float alt = location.getAltitude()*(float)3.28;//meters to feet
+
         // Do this on the UI thread so we can update text views
         activity.runOnUiThread(new Runnable() {
 
             @Override
             public void run() {
+                //Altitude
+                TextView printAlt = (TextView) activity.findViewById(R.id.altitude);
+                String s = String.valueOf(alt);
+                printAlt.setText(s);
+                if(alt>=4 && alt <=15)
+                    printAlt.setTextColor(0xff00E51B);
+                else
+                    printAlt.setTextColor(0xffFF0000);
 
                 // Calculate and display tilt
                 double tilt = Wind.calculateTilt(pitch, roll);
