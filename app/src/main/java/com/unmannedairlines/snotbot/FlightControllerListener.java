@@ -68,7 +68,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
             public void run() {
                 //Altitude
                 TextView printAlt = (TextView) activity.findViewById(R.id.altitude);
-                if((alt+activity.takeOff)>=4 && (alt+activity.takeOff) <=15)
+                if((alt+activity.takeOff)>=8 && (alt+activity.takeOff) <=15)
                     printAlt.setTextColor(0xff00E51B);
                 else
                     printAlt.setTextColor(0xffFF0000);
