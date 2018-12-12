@@ -102,6 +102,23 @@
         app:layout_constraintStart_toStartOf="@+id/fpvWidget"
         />
 
+    <ImageView
+        android:id="@+id/altScale"
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintTop_toBottomOf="@id/signal"
+        app:srcCompat="@mipmap/alt_scale"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ImageView
+        android:id="@+id/altArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="@+id/altScale"
+        app:layout_constraintBottom_toBottomOf="@+id/altScale"
+        app:srcCompat="@mipmap/alt_arrow" />
+
     <dji.ux.widget.controls.CameraCaptureWidget
         android:id="@+id/cameraControls"
         android:layout_width="75dp"

@@ -59,6 +59,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
         Log.v(TAG, "Lng: " + Double.toString(location.getLongitude()));
         Log.v(TAG, "Alt: " + Double.toString(location.getAltitude()));
 
+        //set altitude variable in feet
         final float alt = location.getAltitude()*(float)3.28;//meters to feet
 
         // Do this on the UI thread so we can update text views
@@ -72,8 +73,16 @@ public class FlightControllerListener implements FlightControllerState.Callback 
                     printAlt.setTextColor(0xff00E51B);
                 else
                     printAlt.setTextColor(0xffFF0000);
+
                 String s = String.valueOf(alt+activity.takeOff);
                 printAlt.setText(s);
+
+                //altitude scale
+                activity.altArrow.setY(1150-((alt+activity.takeOff)*(float)21));
+
+                //Y 100dp = 45ft
+                //Y 575dp = 0ft
+                //setY(975 - ...) sets arrow to about 8ft
 
 
                 // Calculate and display tilt
