@@ -1,9 +1,8 @@
 package com.unmannedairlines.snotbot;
 
-import android.location.Location;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.TextView;
 
 import dji.common.flightcontroller.Attitude;
 import dji.common.flightcontroller.FlightControllerState;
@@ -40,7 +39,6 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
         // Get aircraft attitude
         Attitude att = fcState.getAttitude();
-        LocationCoordinate3D position = flightControllerState.getAircraftLocation();
         final double pitch = att.pitch;
         final double roll = att.roll;
         final double yaw = att.yaw;
@@ -66,23 +64,35 @@ public class FlightControllerListener implements FlightControllerState.Callback 
         Log.v(TAG, "Alt: " + Double.toString(location.getAltitude()));
         */
 
+        //set altitude variable in feet
+        final float alt = location.getAltitude()*(float)3.28;//meters to feet
+
         // Do this on the UI thread so we can update text views
         activity.runOnUiThread(new Runnable() {
 
             @Override
             public void run() {
+                //Altitude
+                TextView printAlt = (TextView) activity.findViewById(R.id.altitude);
+                if((alt+activity.takeOff)>=8 && (alt+activity.takeOff) <=15)
+                    printAlt.setTextColor(0xff00E51B);
+                else
+                    printAlt.setTextColor(0xffFF0000);
 
-                // Calculate and display tilt
-                double tilt = Wind.calculateTilt(pitch, roll);
-                Log.v(TAG, "Wind tilt: " + Double.toString(tilt));
+                String s = String.valueOf(alt+activity.takeOff);
+                printAlt.setText(s);
 
-                // display altitude on scale
-                float alt = location.getAltitude();
-                activity.altArrow.setY(1150-(alt*(float)69));
+                //altitude scale
+                activity.altArrow.setY(1150-((alt+activity.takeOff)*(float)21));
 
                 //Y 100dp = 45ft
                 //Y 575dp = 0ft
                 //setY(975 - ...) sets arrow to about 8ft
+
+
+                // Calculate and display tilt
+                double tilt = Wind.calculateTilt(pitch, roll);
+                Log.v(TAG, "Wind tilt: " + Double.toString(tilt));
 
                 //only update wind if stick inputs are 0
                 stickCheck:

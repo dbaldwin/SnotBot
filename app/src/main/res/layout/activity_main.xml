@@ -84,6 +84,7 @@
         android:id="@+id/maxWind"
         android:layout_width="600dp"
         android:layout_height="600dp"
+        android:layout_marginBottom="48dp"
         android:layout_marginStart="212dp"
         android:layout_marginTop="75dp"
         app:layout_constraintBottom_toBottomOf="@+id/fpvWidget"
@@ -94,15 +95,16 @@
 
     <ImageView
         android:id="@+id/minWind"
+        app:srcCompat="@mipmap/min_max"
         android:layout_width="600dp"
         android:layout_height="600dp"
+        android:layout_marginBottom="48dp"
         android:layout_marginStart="212dp"
         android:layout_marginTop="75dp"
         app:layout_constraintBottom_toBottomOf="@+id/fpvWidget"
         app:layout_constraintStart_toStartOf="@+id/fpvWidget"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@mipmap/min_max" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/altScale"
@@ -111,7 +113,8 @@
         android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signal"
-        app:srcCompat="@mipmap/alt_scale" />
+        app:srcCompat="@mipmap/alt_scale"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageView
         android:id="@+id/altArrow"
@@ -154,6 +157,58 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/fpvWidget"
         app:layout_constraintEnd_toEndOf="@+id/fpvWidget" />
+
+    <TextView
+        android:id="@+id/altitude"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="80dp"
+        android:gravity="left|bottom"
+        android:text="ALT:"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="@+id/fpvWidget"
+        app:layout_constraintEnd_toEndOf="@+id/fpvWidget" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/fpvWidget"
+        android:layout_marginRight="30dp"
+        app:layout_constraintRight_toLeftOf="@id/altitude"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/decrease"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:onClick="decreaseInteger"
+            android:text="-"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/integer_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="0dp"
+            android:text="0"
+            android:textStyle="bold"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/increase"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:onClick="increaseInteger"
+            android:text="+" />
+
+
+    </LinearLayout>
 
 
 
