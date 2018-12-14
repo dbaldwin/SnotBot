@@ -8,25 +8,6 @@
     tools:context="com.unmannedairlines.snotbot.MainActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/black"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </LinearLayout>
-
-        <dji.ux.widget.FPVWidget
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <dji.ux.widget.FPVOverlayWidget
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
-    <LinearLayout
         android:id="@+id/signal"
         android:layout_width="match_parent"
         android:layout_height="33dp"
@@ -61,6 +42,27 @@
 
     </LinearLayout>
 
+    <dji.ux.widget.FPVWidget
+        android:id="@+id/fpvWidget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sourceCameraNameVisibility="false" />
+
+    <dji.ux.widget.FPVOverlayWidget
+        android:id="@+id/fpvOverlayWidget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <dji.ux.widget.RemainingFlightTimeWidget
         android:id="@+id/remaining_flight_time"
         android:layout_width="match_parent"
@@ -73,8 +75,8 @@
         android:layout_width="0dp"
         android:layout_height="600dp"
         android:layout_marginTop="75dp"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/fpvWidget"
+        app:layout_constraintStart_toStartOf="@+id/fpvWidget"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/wind_arrow" />
 
@@ -84,8 +86,8 @@
         android:layout_height="600dp"
         android:layout_marginStart="212dp"
         android:layout_marginTop="75dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/fpvWidget"
+        app:layout_constraintStart_toStartOf="@+id/fpvWidget"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@mipmap/min_max" />
@@ -96,8 +98,8 @@
         android:layout_height="600dp"
         android:layout_marginStart="212dp"
         android:layout_marginTop="75dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/fpvWidget"
+        app:layout_constraintStart_toStartOf="@+id/fpvWidget"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@mipmap/min_max" />
@@ -107,9 +109,9 @@
         android:layout_width="wrap_content"
         android:layout_height="500dp"
         android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signal"
-        app:srcCompat="@mipmap/alt_scale"
-        tools:layout_editor_absoluteX="0dp" />
+        app:srcCompat="@mipmap/alt_scale" />
 
     <ImageView
         android:id="@+id/altArrow"
@@ -126,8 +128,8 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/fpvWidget"
+        app:layout_constraintEnd_toEndOf="@+id/fpvWidget"
         app:layout_constraintTop_toBottomOf="@+id/signal" />
 
     <dji.ux.widget.dashboard.DashboardWidget
@@ -136,8 +138,8 @@
         android:layout_height="91dp"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout" >
+        app:layout_constraintBottom_toBottomOf="@+id/fpvWidget"
+        app:layout_constraintStart_toStartOf="@+id/fpvWidget" >
 
     </dji.ux.widget.dashboard.DashboardWidget>
 
@@ -150,8 +152,8 @@
         android:gravity="right"
         android:text="SDK:"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout" />
+        app:layout_constraintBottom_toBottomOf="@+id/fpvWidget"
+        app:layout_constraintEnd_toEndOf="@+id/fpvWidget" />
 
 
 

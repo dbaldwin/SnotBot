@@ -45,6 +45,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
         final double roll = att.roll;
         final double yaw = att.yaw;
 
+        /*
         // Just log these for now
         Log.v(TAG, "Pitch: " + Double.toString(pitch));
         Log.v(TAG, "Roll: " + Double.toString(roll));
@@ -54,12 +55,16 @@ public class FlightControllerListener implements FlightControllerState.Callback 
         Log.v(TAG, "Vel X: " + Float.toString(fcState.getVelocityX()));
         Log.v(TAG, "Vel Y: " + Float.toString(fcState.getVelocityY()));
         Log.v(TAG, "Vel Z: " + Float.toString(fcState.getVelocityZ()));
+        */
 
         // Get aircraft location
         final LocationCoordinate3D location = fcState.getAircraftLocation();
+
+        /*
         Log.v(TAG, "Lat: " + Double.toString(location.getLatitude()));
         Log.v(TAG, "Lng: " + Double.toString(location.getLongitude()));
         Log.v(TAG, "Alt: " + Double.toString(location.getAltitude()));
+        */
 
         // Do this on the UI thread so we can update text views
         activity.runOnUiThread(new Runnable() {

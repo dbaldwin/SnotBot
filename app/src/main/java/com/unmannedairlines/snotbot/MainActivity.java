@@ -175,23 +175,31 @@ public class MainActivity extends AppCompatActivity {
                         public void onProductConnect(BaseProduct baseProduct) {
 
                             Log.d(TAG, String.format("onProductConnect newProduct:%s", baseProduct));
-                            showToast(baseProduct.getModel().getDisplayName() + " connected");
-                            notifyStatusChange();
+
+                            // This will error when connected to RC and drone is not powered up
+                            if (null != baseProduct.getModel()) {
+                                showToast(baseProduct.getModel().getDisplayName() + " connected");
+                            }
 
                             // This sets up a listener for us to grab FC attitude, velocity, and location
-                            Aircraft a = (Aircraft) DJISDKManager.getInstance().getProduct();
-                            FlightController f = a.getFlightController();
-                            f.setStateCallback(new FlightControllerListener(MainActivity.this));
+                            if (MApplication.isFlightControllerAvailable()) {
+                                FlightController f = MApplication.getAircraftInstance().getFlightController();
+                                f.setStateCallback(new FlightControllerListener(MainActivity.this));
+                            }
 
                             // Use joysticks to determine if pilot is controlling aircraft
-                            RemoteController rc = (RemoteController) ((Aircraft) DJISDKManager.getInstance().getProduct()).getRemoteController();
-                            rc.setHardwareStateCallback(new RemoteControllerListener());
+                            if (MApplication.isRemoteControllerAvailable()) {
+                                RemoteController rc = MApplication.getAircraftInstance().getRemoteController();
+                                rc.setHardwareStateCallback(new RemoteControllerListener());
+                            }
 
                             // Let's find a better place for this later. For now we'll set the camera mode to video.
                             setCameraMode(baseProduct.getCamera(), SettingsDefinitions.CameraMode.RECORD_VIDEO);
 
                             // This prints the log file storage location
                             //Log.v(TAG, DJISDKManager.getInstance().getLogPath());
+
+                            notifyStatusChange();
 
                         }
 
