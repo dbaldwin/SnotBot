@@ -115,7 +115,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
                 }
 
                 else{
-                    double direction = Wind.calculateDirection(pitchRA.getAverage(), rollRA.getAverage(), Wind.tempYaw) - yaw + Wind.tempYaw;
+                    double direction = Wind.calculateDirection(pitchRA.getAverage(), rollRA.getAverage(), Wind.tempYaw) - yaw + Wind.tempYaw; //testing commit message
                     Log.v(TAG, "Temp wind direction: " + Double.toString(direction));
                     activity.windArrow.setRotation((float)direction);
                 }
