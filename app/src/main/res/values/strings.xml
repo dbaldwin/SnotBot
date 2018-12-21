@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">SnotBot</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_auto_record">Automatically record video</string>
+    <string name="pref_auto_record_description">When enabled this setting will automatically start and stop video recording whenever motors are armed and disarmed</string>
+
+    <string name="pref_takeoff_altitude">Altitude offset</string>
+    <string name="pref_takeoff_altitude_description">Specify an altitude to be used as an offset applied to the current aircraft altitude</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
 </resources>

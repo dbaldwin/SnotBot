@@ -27,8 +27,8 @@
     <uses-feature
         android:name="android.hardware.usb.accessory"
         android:required="true" />
-    <!-- end DJI SDK permissions -->
 
+    <!-- end DJI SDK permissions -->
     <application
         android:name=".MApplication"
         android:allowBackup="true"
@@ -40,24 +40,28 @@
 
         <!-- DJI SDK -->
         <uses-library android:name="com.android.future.usb.accessory" />
+
         <meta-data
             android:name="com.dji.sdk.API_KEY"
             android:value="dd8da52b6ce844361e4805ea" />
+
         <activity
             android:name="dji.sdk.sdkmanager.DJIAoaControllerActivity"
-            android:theme="@android:style/Theme.Translucent" >
+            android:theme="@android:style/Theme.Translucent">
             <intent-filter>
                 <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
             </intent-filter>
+
             <meta-data
                 android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
                 android:resource="@xml/accessory_filter" />
         </activity>
-        <service android:name="dji.sdk.sdkmanager.DJIGlobalService" >
-        </service>
+
+        <service android:name="dji.sdk.sdkmanager.DJIGlobalService" />
         <!-- end DJI SDK -->
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="sensorLandscape">
             <intent-filter>
@@ -66,7 +70,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

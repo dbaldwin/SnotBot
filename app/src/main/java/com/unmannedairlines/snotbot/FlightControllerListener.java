@@ -123,6 +123,11 @@ public class FlightControllerListener implements FlightControllerState.Callback 
             }
         });
 
+        // If motors are on let's start recording
+        /*if (flightControllerState.areMotorsOn() && MApplication.getProductInstance().getCamera()) {
+
+        }*/
+
 
     }
 }

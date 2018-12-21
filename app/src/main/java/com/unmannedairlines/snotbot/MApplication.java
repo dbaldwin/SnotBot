@@ -38,6 +38,10 @@ public class MApplication extends Application {
         return (null != MApplication.getProductInstance());
     }
 
+    public static boolean isCameraModuleAvailable() {
+        return isProductModuleAvailable() && (null != MApplication.getProductInstance().getCamera());
+    }
+
     public static boolean isFlightControllerAvailable() {
         return isProductModuleAvailable() && isAircraft() && (null != MApplication.getAircraftInstance()
                 .getFlightController());

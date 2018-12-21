@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,22 +24,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import dji.common.camera.SettingsDefinitions;
 import dji.common.error.DJIError;
 import dji.common.error.DJISDKError;
-import dji.common.util.CommonCallbacks;
 import dji.sdk.base.BaseComponent;
 import dji.sdk.base.BaseProduct;
 import dji.sdk.camera.Camera;
 import dji.sdk.flightcontroller.FlightController;
-import dji.sdk.products.Aircraft;
 import dji.sdk.remotecontroller.RemoteController;
 import dji.sdk.sdkmanager.DJISDKManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
     public static final String FLAG_CONNECTION_CHANGE = "dji_sdk_connection_change";
-    private static BaseProduct mProduct;
     private Handler mHandler;
 
     private static final String[] REQUIRED_PERMISSION_LIST = new String[]{
@@ -79,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
         takeOff = takeOff + 1;
         display(takeOff);
 
-    }public void decreaseInteger(View view) {
+    }
+
+    public void decreaseInteger(View view) {
         takeOff = takeOff - 1;
         display(takeOff);
     }
@@ -105,17 +104,26 @@ public class MainActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         // Wind indicator
-        windArrow = (ImageView) findViewById(R.id.windArrow);
-        minWind = (ImageView) findViewById(R.id.minWind);
-        maxWind = (ImageView) findViewById(R.id.maxWind);
+        windArrow = findViewById(R.id.windArrow);
+        minWind = findViewById(R.id.minWind);
+        maxWind = findViewById(R.id.maxWind);
 
         //Altitude scale
-        altScale = (ImageView) findViewById(R.id.altScale);
-        altArrow = (ImageView) findViewById(R.id.altArrow);
+        altScale = findViewById(R.id.altScale);
+        altArrow = findViewById(R.id.altArrow);
 
         // Populate the SDK version
-        sdkVersion = (TextView) findViewById(R.id.sdkVersion);
+        sdkVersion = findViewById(R.id.sdkVersion);
         sdkVersion.setText("SDK " + DJISDKManager.getInstance().getSDKVersion());
+
+        // Setup the settings button click handler
+        findViewById(R.id.settingsButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -212,8 +220,11 @@ public class MainActivity extends AppCompatActivity {
                                 rc.setHardwareStateCallback(new RemoteControllerListener());
                             }
 
-                            // Let's find a better place for this later. For now we'll set the camera mode to video.
-                            setCameraMode(baseProduct.getCamera(), SettingsDefinitions.CameraMode.RECORD_VIDEO);
+                            // Check if camera is available so we can listen for events
+                            if (MApplication.isCameraModuleAvailable()) {
+                                Camera cam = MApplication.getProductInstance().getCamera();
+                                cam.setSystemStateCallback(new CameraListener());
+                            }
 
                             // This prints the log file storage location
                             //Log.v(TAG, DJISDKManager.getInstance().getLogPath());
@@ -268,28 +279,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), toastMsg, Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    // Set camera mode to video so the CameraCaptureWidget will start/stop video when pressed
-    private void setCameraMode(Camera camera, SettingsDefinitions.CameraMode cameraMode) {
-
-        if (camera != null) {
-
-            camera.setMode(cameraMode, new CommonCallbacks.CompletionCallback() {
-                @Override
-                public void onResult(DJIError djiError) {
-
-                    if (djiError == null) {
-                        showToast("Camera mode set to video");
-                    } else {
-                        showToast("Error setting camera mode to video");
-                    }
-
-                }
-            });
-
-        }
-
     }
 
 }
