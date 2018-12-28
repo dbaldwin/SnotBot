@@ -51,7 +51,7 @@
         android:background="@null"
         app:layout_constraintEnd_toEndOf="@+id/cameraControls"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/alert_icon" />
+        app:srcCompat="@mipmap/hamburger" />
 
     <dji.ux.widget.FPVWidget
         android:id="@+id/fpvWidget"
