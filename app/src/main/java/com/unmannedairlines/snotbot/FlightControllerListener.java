@@ -1,12 +1,17 @@
 package com.unmannedairlines.snotbot;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.TextView;
 
+import dji.common.error.DJIError;
 import dji.common.flightcontroller.Attitude;
 import dji.common.flightcontroller.FlightControllerState;
 import dji.common.flightcontroller.LocationCoordinate3D;
+import dji.common.util.CommonCallbacks;
+import dji.sdk.camera.Camera;
 
 /**
  * Created by db on 11/3/18.
@@ -16,6 +21,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
     private static final String TAG = FlightControllerListener.class.getName();
     private MainActivity activity;
+    private boolean autoRecordVideo;
 
 
     // Calculate the rolling averages for pitch and roll using the last 10 readings
@@ -24,11 +30,46 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
     public FlightControllerListener(MainActivity activity) {
         this.activity = activity;
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.activity);
+        autoRecordVideo = prefs.getBoolean("auto_record_video", false);
     }
 
     @Override
     public void onUpdate(@NonNull FlightControllerState flightControllerState) {
         updateTelemetry(flightControllerState);
+
+        // If motors are on let's determine if we should start recording video
+        if (flightControllerState.areMotorsOn() && autoRecordVideo) {
+
+            // Let's not continuously call this
+            if (!CameraListener.isCameraRecording) {
+                Camera camera = MApplication.getProductInstance().getCamera();
+                camera.startRecordVideo(new CommonCallbacks.CompletionCallback() {
+                    @Override
+                    public void onResult(DJIError djiError) {
+                        if (null != djiError) {
+                            Log.v("FCListener", "Error starting record video");
+                        }
+                    }
+                });
+            }
+        // Stop recording video
+        } else if (!flightControllerState.areMotorsOn() && CameraListener.isCameraRecording) {
+
+            Camera camera = MApplication.getProductInstance().getCamera();
+            camera.stopRecordVideo(new CommonCallbacks.CompletionCallback() {
+                @Override
+                public void onResult(DJIError djiError) {
+
+                    if (null != djiError) {
+                        Log.v("FCListener", "Error stopping record video");
+                    }
+
+                }
+            });
+
+        }
     }
 
     // By default this method should run at 10 Hz
@@ -122,12 +163,6 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
             }
         });
-
-        // If motors are on let's start recording
-        /*if (flightControllerState.areMotorsOn() && MApplication.getProductInstance().getCamera()) {
-
-        }*/
-
 
     }
 }

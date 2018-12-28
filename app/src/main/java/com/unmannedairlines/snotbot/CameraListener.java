@@ -15,6 +15,8 @@ import dji.sdk.camera.Camera;
 
 public class CameraListener implements SystemState.Callback {
 
+    public static boolean isCameraRecording = false;
+
     public CameraListener() {
 
         // Default the camera to video
@@ -24,6 +26,13 @@ public class CameraListener implements SystemState.Callback {
 
     @Override
     public void onUpdate(@NonNull SystemState systemState) {
+
+        if(systemState.isRecording()) {
+            isCameraRecording = true;
+        } else {
+            isCameraRecording = false;
+        }
+
 
     }
 

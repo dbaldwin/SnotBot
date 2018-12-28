@@ -84,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void display(int number) {
-        TextView displayInteger = (TextView) findViewById(
-                R.id.integer_number);
+        TextView displayInteger = (TextView) findViewById(R.id.integer_number);
         displayInteger.setText("" + number);
     }//end code for take off alt
 
