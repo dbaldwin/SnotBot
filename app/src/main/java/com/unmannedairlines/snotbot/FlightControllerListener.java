@@ -30,14 +30,15 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
     public FlightControllerListener(MainActivity activity) {
         this.activity = activity;
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.activity);
-        autoRecordVideo = prefs.getBoolean("auto_record_video", false);
     }
 
     @Override
     public void onUpdate(@NonNull FlightControllerState flightControllerState) {
         updateTelemetry(flightControllerState);
+
+        // We may consider moving this elsewhere since it will be get called frequently
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.activity);
+        autoRecordVideo = prefs.getBoolean("auto_record_video", false);
 
         // If motors are on let's determine if we should start recording video
         if (flightControllerState.areMotorsOn() && autoRecordVideo) {
