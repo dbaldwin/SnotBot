@@ -42,19 +42,19 @@ public class FlightControllerListener implements FlightControllerState.Callback 
         // If motors are on let's determine if we should start recording video
         if (flightControllerState.areMotorsOn() && autoRecordVideo) {
 
-            // Let's not continuously call this
+            // Let's not continuously call this since onUpdate gets called frequently
             if (!CameraListener.isCameraRecording) {
                 Camera camera = MApplication.getProductInstance().getCamera();
                 camera.startRecordVideo(new CommonCallbacks.CompletionCallback() {
                     @Override
                     public void onResult(DJIError djiError) {
                         if (null != djiError) {
-                            Log.v("FCListener", "Error starting record video");
+                            Log.v(TAG, "Error starting record video");
                         }
                     }
                 });
             }
-        // Stop recording video
+        // Stop recording video when motors stop and the camera is already recording
         } else if (!flightControllerState.areMotorsOn() && CameraListener.isCameraRecording) {
 
             Camera camera = MApplication.getProductInstance().getCamera();
@@ -63,7 +63,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
                 public void onResult(DJIError djiError) {
 
                     if (null != djiError) {
-                        Log.v("FCListener", "Error stopping record video");
+                        Log.v(TAG, "Error stopping record video");
                     }
 
                 }
@@ -133,7 +133,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
                 // Calculate and display tilt
                 double tilt = Wind.calculateTilt(pitch, roll);
-                Log.v(TAG, "Wind tilt: " + Double.toString(tilt));
+                //Log.v(TAG, "Wind tilt: " + Double.toString(tilt));
 
                 //only update wind if stick inputs are 0
                 stickCheck:
@@ -145,7 +145,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
                     // Set the wind arrow direction
                     double direction = Wind.calculateDirection(pitch, roll, yaw);
-                    Log.v(TAG, "Updated wind direction: " + Double.toString(direction));
+                    //Log.v(TAG, "Updated wind direction: " + Double.toString(direction));
 
                     // We're using the average of the sensor values to update the wind widget
                     pitchRA.add(pitch);
@@ -157,7 +157,7 @@ public class FlightControllerListener implements FlightControllerState.Callback 
 
                 else{
                     double direction = Wind.calculateDirection(pitchRA.getAverage(), rollRA.getAverage(), Wind.tempYaw) - yaw + Wind.tempYaw; //testing commit message 
-                    Log.v(TAG, "Temp wind direction: " + Double.toString(direction));
+                    //Log.v(TAG, "Temp wind direction: " + Double.toString(direction));
                     activity.windArrow.setRotation((float)direction);
                 }
 

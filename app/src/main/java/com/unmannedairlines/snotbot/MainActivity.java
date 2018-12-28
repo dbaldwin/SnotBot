@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                                 showToast("SDK registered successfully...");
                                 DJISDKManager.getInstance().startConnectionToProduct();
                             } else {
-                                showToast("SDK registration failds, please check the bundle id and network connection...");
+                                showToast("SDK registration failed, please check the bundle id and network connection...");
                             }
                             Log.v(TAG, djiError.getDescription());
                         }
