@@ -23,7 +23,6 @@ public class FlightControllerListener implements FlightControllerState.Callback 
     private MainActivity activity;
     private boolean autoRecordVideo;
 
-
     // Calculate the rolling averages for pitch and roll using the last 10 readings
     RollingAverage pitchRA = new RollingAverage(10);
     RollingAverage rollRA = new RollingAverage(10);
@@ -35,6 +34,9 @@ public class FlightControllerListener implements FlightControllerState.Callback 
     @Override
     public void onUpdate(@NonNull FlightControllerState flightControllerState) {
         updateTelemetry(flightControllerState);
+
+        // Allow video to be recorded from the RC button
+        if (RemoteControllerListener.recordVideoWithRCButton) return;
 
         // We may consider moving this elsewhere since it will be get called frequently
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.activity);
