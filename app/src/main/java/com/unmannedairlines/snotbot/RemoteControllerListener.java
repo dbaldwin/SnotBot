@@ -2,7 +2,11 @@ package com.unmannedairlines.snotbot;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+
+import dji.common.gimbal.Attitude;
+import dji.common.gimbal.Rotation;
 import dji.common.remotecontroller.HardwareState;
+import dji.sdk.mission.timeline.actions.GimbalAttitudeAction;
 
 /**
  * Created by db on 11/4/18.
@@ -35,6 +39,12 @@ public class RemoteControllerListener implements HardwareState.HardwareStateCall
                 recordVideoWithRCButton = false;
 
 
+        }
+
+        if (hardwareState.getC1Button().isClicked()) {
+            Attitude attitude = new Attitude(-30, Rotation.NO_ROTATION, Rotation.NO_ROTATION);
+            GimbalAttitudeAction gimbalAction = new GimbalAttitudeAction(attitude);
+            gimbalAction.setCompletionTime(1);
         }
 
     }

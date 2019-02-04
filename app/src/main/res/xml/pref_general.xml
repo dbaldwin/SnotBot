@@ -19,6 +19,17 @@
         android:title="@string/pref_takeoff_altitude"
         android:summary="@string/pref_takeoff_altitude_description"/>
 
+    <EditTextPreference
+        android:capitalize="words"
+        android:defaultValue="0"
+        android:inputType="textCapWords"
+        android:key="gimbal_set"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Gimbal angle"
+        android:summary="Specify gimbal angle to go to when pressing C1 button"/>
+
     <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
          dismiss it. -->
     <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
