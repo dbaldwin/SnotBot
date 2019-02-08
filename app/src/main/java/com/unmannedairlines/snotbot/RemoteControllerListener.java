@@ -1,12 +1,21 @@
 package com.unmannedairlines.snotbot;
 
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import dji.common.gimbal.Attitude;
 import dji.common.gimbal.Rotation;
+import dji.common.gimbal.RotationMode;
+import dji.common.remotecontroller.AircraftMapping;
 import dji.common.remotecontroller.HardwareState;
+import dji.keysdk.GimbalKey;
+import dji.sdk.base.BaseProduct;
+import dji.sdk.gimbal.Gimbal;
 import dji.sdk.mission.timeline.actions.GimbalAttitudeAction;
+import dji.sdk.products.Aircraft;
+import dji.sdk.sdkmanager.DJISDKManager;
 
 /**
  * Created by db on 11/4/18.
@@ -41,11 +50,36 @@ public class RemoteControllerListener implements HardwareState.HardwareStateCall
 
         }
 
+        //set gimbal to 60 degrees on button press
         if (hardwareState.getC1Button().isClicked()) {
-            Attitude attitude = new Attitude(-30, Rotation.NO_ROTATION, Rotation.NO_ROTATION);
-            GimbalAttitudeAction gimbalAction = new GimbalAttitudeAction(attitude);
-            gimbalAction.setCompletionTime(1);
+
+            BaseProduct product = DJISDKManager.getInstance().getProduct();
+            Gimbal gimbal = product.getGimbal();
+
+            Rotation.Builder builder = new Rotation.Builder().mode(RotationMode.ABSOLUTE_ANGLE).time(2);
+
+            builder.pitch(-60);
+            builder.roll(0);
+            builder.yaw(0);
+
+            sendRotateGimbalCommand(builder.build());
+        }
+    }//end onUpdate
+
+    private void sendRotateGimbalCommand(Rotation rotation) {
+
+
+        BaseProduct product = DJISDKManager.getInstance().getProduct();
+        Gimbal gimbal = product.getGimbal();
+
+        if (gimbal == null) {
+
+            return;
+
         }
 
+        gimbal.rotate(rotation, null);
+
     }
+
 }
