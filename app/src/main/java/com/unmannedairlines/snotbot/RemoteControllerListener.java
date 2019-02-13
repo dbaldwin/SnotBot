@@ -1,7 +1,9 @@
 package com.unmannedairlines.snotbot;
 
+import android.content.SharedPreferences;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -26,6 +28,11 @@ public class RemoteControllerListener implements HardwareState.HardwareStateCall
     protected static int leftStickHorizontal, leftStickVertical, rightStickHorizontal, rightStickVertical;
     private static final String TAG = RemoteControllerListener.class.getName();
     public static boolean recordVideoWithRCButton = false;
+    private MainActivity activity;
+
+    public RemoteControllerListener(MainActivity activity) {
+        this.activity = activity;
+    }
 
     @Override
     // Looks like endpoint ranges from -660 to +660 in vertical and horizontal directions
@@ -53,12 +60,12 @@ public class RemoteControllerListener implements HardwareState.HardwareStateCall
         //set gimbal to 60 degrees on button press
         if (hardwareState.getC1Button().isClicked()) {
 
-            BaseProduct product = DJISDKManager.getInstance().getProduct();
-            Gimbal gimbal = product.getGimbal();
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.activity);
+            String pitchStr = prefs.getString("gimbal_set", "-60");
 
             Rotation.Builder builder = new Rotation.Builder().mode(RotationMode.ABSOLUTE_ANGLE).time(2);
 
-            builder.pitch(-60);
+            builder.pitch(Integer.parseInt(pitchStr));
             builder.roll(0);
             builder.yaw(0);
 
@@ -80,6 +87,13 @@ public class RemoteControllerListener implements HardwareState.HardwareStateCall
 
         gimbal.rotate(rotation, null);
 
+    }
+
+    public void printGimbalPitch() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.activity);
+        int pitchAngle = prefs.getInt("gimbal_set", -60);
+
+        Log.v("RCListener", Integer.toString(pitchAngle));
     }
 
 }

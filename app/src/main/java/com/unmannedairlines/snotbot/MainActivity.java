@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
                             // Use joysticks to determine if pilot is controlling aircraft
                             if (MApplication.isRemoteControllerAvailable()) {
                                 RemoteController rc = MApplication.getAircraftInstance().getRemoteController();
-                                rc.setHardwareStateCallback(new RemoteControllerListener());
+                                rc.setHardwareStateCallback(new RemoteControllerListener(MainActivity.this));
                             }
 
                             // Check if camera is available so we can listen for events
